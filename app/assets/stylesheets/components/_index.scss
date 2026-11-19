@@ -3,3 +3,35 @@
 @import "avatar";
 @import "form_legend_clear";
 @import "navbar";
+
+
+.body {
+  background-color: beige;
+}
+.container {
+  background-color: beige;
+  padding: 0 16px;
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+}
+
+.actionlist {
+  display: grid;
+  grid-template-columns:  1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.bottomsection {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background-image: asset-url("Pierce");
+  text-align: left;
+  height: 150px;
+  h4 {
+    font-size: small;
+  }
+}
