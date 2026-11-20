@@ -22,3 +22,27 @@
   </div>
   </div>
 </div>
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col-sm-8"><strong>Already available movie lists</strong></div>
+      <ul class="list-group list-group-horizontal-sm">
+        <% @lists.each do |list| %>
+        <li class="list-group-item">
+          <div class="card listcard">
+            <div class="card-body">
+              <%= link_to list.name, list_path(list) %>
+              <span class="badge text-bg-primary rounded-pill"><%= list.movies.length %></span>
+            </div>
+          </div>
+        </li>
+        <% end %>
+      </ul>
+    <div class="col-sm-4"><strong>Create your own list</strong>
+      <%= simple_form_for @list do |f| %>
+        <%= f.input :name %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+</div>
