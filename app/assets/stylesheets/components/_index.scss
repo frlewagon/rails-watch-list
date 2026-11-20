@@ -8,30 +8,67 @@
 .body {
   background-color: beige;
 }
-.container {
+.mybox {
   background-color: beige;
   padding: 0 16px;
   justify-content: center;
-  text-align: center;
+  text-align: left;
   margin: 0;
+  h1 {
+    font-weight: bold;
+  }
+}
+
+.parent {
+  width: 1100px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .actionlist {
   display: grid;
-  grid-template-columns:  1fr 1fr 1fr;
+  grid-template-columns:  1fr 1fr;
   gap: 16px;
+  margin-right: 16px;
 }
 
 .bottomsection {
-  display: flex;
-  justify-content: center;
+  padding-left: 20px;
+  width: 300px;
+  margin-left: 16px;
+  border-left: 1px solid black;
+  text-align: left;
+  margin-bottom: 10px;
+  h2 {
+    font-size: medium;
+    font-weight: bold;
+  }
 }
 
-.card {
+.moviecard {
   background-image: asset-url("Pierce");
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,2);
   text-align: left;
   height: 150px;
   h4 {
     font-size: small;
+  }
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,2);
+  }
+}
+
+.reviewcard {
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,2);
+  text-align: left;
+  h4 {
+    font-size: small;
+  }
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,2);
   }
 }

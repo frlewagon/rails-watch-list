@@ -1,34 +1,58 @@
-<h1><%= "List: #{@list.name}" %></h1>
-<h2><%= "Movies included in this  list:" %></h2>
-<ul>
-<% @movies.each do |movie| %>
-<% bookmark = Bookmark.find_by(movie_id: movie.id, list_id: @list.id) %>
-<li> <%= movie.title %> <%= link_to "Remove this movie", bookmark_path(bookmark.id) , class: "btn btn-outline-warning mt-3", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %> </li>
-<% end %>
-</ul>
+<div class="mybox">
 
-<h2><%= "Add a new movie in this list" %></h2>
+<div class="container">
+  <h1><%= "List: #{@list.name}" %></h1>
+  <h2><%= "Movies included in this  list:" %></h2>
+  <div class="parent">
+    <div class="actionlist">
+      <% @movies.each do |movie| %>
+      <% bookmark = Bookmark.find_by(movie_id: movie.id, list_id: @list.id) %>
+        <div class="moviecard" style="width: 18rem;">
+          <div class="card-body">
+            <h3 class="card-title"> <%= movie.title %></h3>
+            <h4 class="card-subtitle mb-2 text-body-secondary"><%= link_to "Remove this movie", bookmark_path(bookmark.id) , class: "btn btn-outline-warning mt-3", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></h4>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="bottomsection">
+      <h2>Add a movie to this list (from our database)</h2>
+      <%= simple_form_for [@list, @bookmark] do |f| %>
+        <%= f.association :movie %>
+        <%= f.input :comment %>
+        <%= f.submit class: "btb btn-outline-primary"%>
+      <% end %>
+    </div>
+  </div>
+  <h2><%= "Existing reviews for this list:" %></h2>
+  <div class="parent">
+    <div class="actionlist">
+      <% @reviews.each do |review| %>
+      <div class="card mb-3 reviewcard">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <%= image_tag "blofeld.png", alt: "Blofeld", class: "w-100" %>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= "Stars: #{review.stars}" %></h5>
+              <p class="card-text"><%= review.content %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <div class="bottomsection">
+      <h2><%= "Add a review for this  list:" %></h2>
+      <%= simple_form_for([ @list, @review ]) do |f| %>
+        <%= f.input :stars %>
+        <%= f.input :content %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
 
-<%= simple_form_for [@list, @bookmark] do |f| %>
-  <%= f.association :movie %>
-  <%= f.input :comment %>
-  <%= f.submit %>
-<% end %>
-
-<h2><%= "Reviews for this  list:" %></h2>
-<ul>
-  <% @reviews.each do |review| %>
-    <li> <%= review.stars %> </li>
-    <li> <%= review.content %> </li>
-    <li><%= link_to "Remove this review", review_path(review.id) , class: "btn btn-outline-warning mt-3", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %> </li>
-  <% end %>
-</ul>
-
-<h2><%= "Add a review for this  list:" %></h2>
-<%= simple_form_for([ @list, @review ]) do |f| %>
-  <%= f.input :stars %>
-  <%= f.input :content %>
-  <%= f.submit %>
-<% end %>
-
-<%= link_to "Back to list menu", lists_path, class: "btn btn-outline-primary mt-3" %>
+  <%= link_to "Back to list menu", lists_path, class: "btn btn-outline-primary mt-3" %>
+</div>
+</div>

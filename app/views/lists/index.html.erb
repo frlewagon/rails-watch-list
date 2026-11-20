@@ -1,16 +1,24 @@
-<div class="container">
-  <h1>Movie lists</h1>
-  <div class="actionlist">
-    <% @lists.each do |list| %>
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h3 class="card-title"><%= link_to list.name, list_path(list) %></h3>
-          <h4 class="card-subtitle mb-2 text-body-secondary"><%= "Number of movies: #{list.movies.length}" %></h4>
+<div class="mybox">
+  <div class="container">
+  <h1>Already available movie lists</h1>
+  <div class="parent">
+    <div class="actionlist">
+      <% @lists.each do |list| %>
+        <div class="moviecard" style="width: 18rem;">
+          <div class="card-body">
+            <h3 class="card-title"><%= link_to list.name, list_path(list) %></h3>
+            <h4 class="card-subtitle mb-2 text-body-secondary"><%= "Number of movies: #{list.movies.length}" %></h4>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
+    <div class="bottomsection">
+      <h2>Create your own list</h2>
+      <%= simple_form_for @list do |f| %>
+        <%= f.input :name %>
+        <%= f.submit %>
+      <% end %>
+    </div>
   </div>
-  <div class="bottomsection">
-    <%= link_to "Create a new list", new_list_path, class: "btn btn-outline-primary mt-3" %>
   </div>
 </div>
